@@ -1,0 +1,13 @@
+[Unit]
+Description=First Boot Setup Script
+After=network.target
+ConditionPathExists=!/var/lib/init-boot-setup-done
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/init-boot-script.sh
+ExecStartPost=/bin/touch /var/lib/init-boot-setup-done
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target 
