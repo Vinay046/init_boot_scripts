@@ -13,7 +13,7 @@ log "Starting first boot setup"
 USER_COUNT=$(awk -F: '($3>=1000)&&($1!="nobody"){print $1}' /etc/passwd | wc -l)
 if [ "$USER_COUNT" -gt 0 ]; then
     log "Non-root user(s) already exist. Skipping first-boot setup."
-    exit 0
+    return 0
 fi
 
 log "=== First Boot Setup ==="
@@ -83,4 +83,4 @@ export LANG=$LOCALE_NAME
 log "=== First Boot Setup Complete ==="
 
 # Note: We don't delete the script anymore as systemd handles the "run once" logic
-exit 0
+return 0
